@@ -1,0 +1,26 @@
+diff --git a/EntityDependencyIterator.inc b/EntityDependencyIterator.inc
+index 9ae6272..5ac669f 100644
+--- a/EntityDependencyIterator.inc
++++ b/EntityDependencyIterator.inc
+@@ -47,13 +47,6 @@ class EntityDependencyIterator implements RecursiveIterator {
+   public $dependencies = array();
+ 
+   /**
+-   * An array of belongings to the entity being parsed.
+-   *
+-   * @var array
+-   */
+-  public $belongings = array();
+-
+-  /**
+    * An array with information on the cause/reason why an entity exists in the
+    * tree. Basically, the cause for term A's existance in the tree, might be
+    * becasue node B depends on it.
+@@ -116,7 +109,6 @@ class EntityDependencyIterator implements RecursiveIterator {
+       $entity = reset($entities);
+ 
+       $this->dependencies = module_invoke_all('entity_dependencies', $entity, $current['type']);
+-      //$this->belongings = module_invoke_all('entity_belongings', $entity, $this->entityType);
+ 
+       // Don't add dependencies that already were checked.
+       foreach ($this->dependencies as $key => $dependency) {

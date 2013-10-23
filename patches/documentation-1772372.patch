@@ -1,0 +1,20 @@
+diff --git a/entity_dependency.api.php b/entity_dependency.api.php
+index b04584b..acf7c0c 100644
+--- a/entity_dependency.api.php
++++ b/entity_dependency.api.php
+@@ -33,10 +33,12 @@
+  * @return array
+  *   The dependencies should be returned as defined below, where the keys are
+  *   the entity type of the returned dependencies.
+- *   @code
++ * @code
+  *   $dependencies = array(
+- *     'node' => array(
+- *
++ *     'node' => array(5, 6),
++ *     'user' => array(2)
++ *   );
++ * @endcode
+  */
+ function hook_entity_dependencies($entity, $entity_type) {
+   if ($entity_type == 'node') {

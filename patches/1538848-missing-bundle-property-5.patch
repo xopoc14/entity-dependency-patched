@@ -1,0 +1,41 @@
+ EntityDependencyIterator.inc | 27 ++++++++++++++++++++++++++-
+ 1 file changed, 26 insertions(+), 1 deletion(-)
+
+diff --git a/EntityDependencyIterator.inc b/EntityDependencyIterator.inc
+index 9ae6272..81d6dff 100644
+--- a/EntityDependencyIterator.inc
++++ b/EntityDependencyIterator.inc
+@@ -87,7 +87,32 @@ class EntityDependencyIterator implements RecursiveIterator {
+    * @see entity_dependency_iterator().
+    */
+   public function __construct($entities, &$parent = NULL) {
+-    $this->entities = $entities;
++    $this->entities = array();
++    foreach ($entities as $entity_arr) {
++      $entity_obj = entity_load($entity_arr['type'], array($entity_arr['id']));
++      if (empty($entity_obj)) {
++        if (isset($parent)) {
++          $error_msg = 'Failed to load %type ID %id, which is a dependency of %parent_type ID %parent_id.';
++          $error_vars = array(
++              '%type' => $entity_arr['type'],
++              '%id' => $entity_arr['id'],
++              '%parent_type' => $parent->current['type'],
++              '%parent_id' => $parent->current['id'],
++          );
++        }
++        else {
++          $error_msg = t('Failed to load requested %type ID %id.');
++          $error_vars = array(
++              '%type' => $entity_arr['type'],
++              '%id' => $entity_arr['id'],
++          );
++        }
++        watchdog('Entity Dependency', $error_msg, $error_vars, WATCHDOG_WARNING);
++      }
++      else {
++        $this->entities[] = $entity_arr;
++      }
++    }
+ 
+     if (empty($parent)) {
+       foreach ($this->entities as $key => $entity) {

@@ -1,0 +1,22 @@
+diff --git a/entity_dependency.core.inc b/entity_dependency.core.inc
+index 9cf7201..c81d289 100644
+--- a/entity_dependency.core.inc
++++ b/entity_dependency.core.inc
+@@ -66,6 +66,17 @@ function taxonomy_entity_dependencies($entity, $entity_type) {
+ }
+ 
+ /**
++ * Implements hook_entity_dependenies().
++ */
++function file_entity_dependencies($entity, $entity_type) {
++  if($entity_type == 'file') {
++    $dependencies = array();
++    entity_dependency_add($dependencies, $entity, 'user', 'uid');
++    return $dependencies;
++  }
++}
++
++/**
+  * Implements hook_entity_dependencies().
+  */
+ function field_entity_dependencies($entity, $entity_type) {

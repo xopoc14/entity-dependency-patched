@@ -1,0 +1,25 @@
+diff --git a/EntityDependencyIterator.inc b/EntityDependencyIterator.inc
+diff --git a/README.txt b/README.txt
+diff --git a/entity_dependency.api.php b/entity_dependency.api.php
+diff --git a/entity_dependency.core.inc b/entity_dependency.core.inc
+index 6b94bc9..a236a0e 100644
+--- a/entity_dependency.core.inc
++++ b/entity_dependency.core.inc
+@@ -11,7 +11,7 @@
+  */
+ 
+ /**
+- * Implements hook_entity_dependenies().
++ * Implements hook_entity_dependencies().
+  */
+ function node_entity_dependencies($entity, $entity_type) {
+   if ($entity_type == 'node') {
+@@ -26,7 +26,7 @@ function node_entity_dependencies($entity, $entity_type) {
+ }
+ 
+ /**
+- * Implements hook_entity_dependenies().
++ * Implements hook_entity_dependencies().
+  */
+ function comment_entity_dependencies($entity, $entity_type) {
+   if ($entity_type == 'comment') {
